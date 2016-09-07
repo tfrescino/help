@@ -108,7 +108,7 @@ start <file2nm>		## modify file2nm
 git commit -a -m "Comment of changes"
 
 # Now, push changes from computer to GitHub: cd to repository (on computer)
-git push https://github.com/tfrescino/FIESTA
+git push https://github.com/tfrescino/FIESTA master
 
 
 ## To pull changes from GitHub repository to computer: cd to repository (on computer)
