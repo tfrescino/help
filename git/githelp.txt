@@ -71,7 +71,7 @@ git diff --staged
 ## To commit changes
 git commit -m "Comment of changes"
 
-## To skip the staging area..  becareful not to include unwanted changes
+## To skip the staging area..  be careful not to include unwanted changes
 git commit -a
 
 ## To remove a file
@@ -96,16 +96,20 @@ start <filenm>
 ##############################################################################
 ## So, the routine would be, if modifying 2 files:
 ##############################################################################
+
+## To make edit changes and update GitHub
+
+# First, modify files in repository (either using start from command line, or opening directly)
 start <file1nm>		## modify file1nm
-git add <file1nm>	## stage file1nm
-
 start <file2nm>		## modify file2nm
-git add <file2nm>	## stage file2nm
 
-git commit -m "Comment of changes"
+# Next, commit all changes with comments (-m), and skipping staging step (-a) 
+# Be careful not to include unwanted changes
+git commit -a -m "Comment of changes"
 
-## To push changes from computer to GitHub: cd to repository (on computer)
+# Now, push changes from computer to GitHub: cd to repository (on computer)
 git push https://github.com/tfrescino/FIESTA
+
 
 ## To pull changes from GitHub repository to computer: cd to repository (on computer)
 git pull https://github.com/tfrescino/FIESTA
