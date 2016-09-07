@@ -40,6 +40,7 @@ git push <origin> <master>
 # git clone <GitHub repository URL.git> <newname>
 git clone https://github.com/tfrescino/FIESTA.git
 
+
 ## To check status of files. 
 # git status <repository>
 cd FIESTA
