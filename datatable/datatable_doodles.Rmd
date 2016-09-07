@@ -1,0 +1,500 @@
+---
+title: "data.table"
+author: "Tracey S. Frescino"
+date: "Aug. 18, 2016"
+output: pdf_document
+---
+<br>
+<br>
+
+## I am making this up
+
+
+###Help Links
+http://user2014.stat.ucla.edu/files/tutorial_Matt.pdf<br>
+http://datatable.r-forge.r-project.org/datatable-intro.pdf
+
+<br>
+
+###Initialize R Environment<br>
+
+```{r}
+
+# Set working directory.
+setwd("C:/_tsf/_GitHub/help/datatable")
+
+# Set options bias for scientific notation
+options(scipen=6)
+
+# Load libraries
+require(data.table)
+require(microbenchmark)
+require(dplyr)
+
+
+
+# Read in Wyoming tree dataset to use as a bit data set to test with.
+system.time(tree.df <- read.csv("data/WYtree.csv", header=TRUE))
+class(tree.df)
+
+# Converting a data frame to a data.table
+# setDT converts lists and data.frames to data.tables by reference (no copy is made)
+microbenchmark(
+    tree.dt <- data.table(tree.df),
+    tree.dt <- setDT(tree.df),
+    tree.dt <- setDT(tree.df, key="PLT_CN")
+)
+
+## fread vs read.csv
+## read.csv() reads rows into memory as character and then tries to convert them to integer and factors
+## freed() reads everything as character
+
+# Create a data.table from tree.df
+system.time(tree.dt <- fread("data/WYtree.csv"))
+class(tree.dt)
+head(tree.dt)
+
+# Create new data table to use as a small dataset to test with
+## strlut
+ESTUNIT <- c(1,1,3,3,5,7,7,9,9,11,11,13,13,15,17,19,19,21,23,23,25)
+STRATA <-  c(1,2,1,2,2,1,2,1,2,1,2,1,2,2,2,1,2,2,1,2,2)
+ACRES <- c(472611,2285002,245547,1776182,3072988,779515,4317444,215408,
+           2514245,540035,1297089,935801,4994287,1428579,1283969,380750,
+           2291052,1720074,762318,1854636,3440445)
+NBRPLOTS <- round(runif(length(ESTUNIT), 1, 500))
+strlut <- data.table(ESTUNIT, STRATA, ACRES)
+strlut2 <- data.table(ESTUNIT, STRATA, NBRPLOTS)
+
+unitvar <- "ESTUNIT"
+strvar <- "STRATA"
+acrevar <- "ACRES"
+
+
+# Read in species look up table
+ref_spcd <- fread("data/ref_spcd.csv")
+
+```
+
+<br>
+
+###Meaning of data.table<br>
+
+**DT[i, j, by]**
+
+Take data.table **DT**, subset rows using **i**, then calculate **j** grouped by **by**
+
+Relationship of commands to SQL
+
+data.table    SQL
+i             where
+j             select
+:=            update
+by            group by
+i             order by (in compound syntax)
+i             having (in compound syntax)
+nomatch=NA    outer join
+nomatch=0     inner join
+
+DT[where, select|update, group by][having][order by][ ]...[ ]
+
+
+###Data Exploration 1 - subset columns<br>
+
+```{r}
+# Subset using numbers to identify columns
+strlut[,1:2, with=FALSE]
+#Bad:
+#strlut[,1:2]
+
+# Subset column as vector
+strlut[,ESTUNIT]
+
+# Subset column as data.table with 1 column
+strlut[,list(ESTUNIT)]
+
+# Subset column as vector, passing variable
+strlut[[unitvar]]
+strlut[,"ESTUNIT", with=FALSE]
+
+
+# Subset 1 column as data.table, passing variable
+strlut[,unitvar, with=FALSE]
+
+# Subset more than 1 column as data.table, passing variable
+strlut[,c(unitvar, strvar), with=FALSE]
+
+# Subset rows 2 and 4 and columns ESTUNIT and STRATA
+strlut[c(2,4), list(ESTUNIT, STRATA)]
+
+
+# Subset rows 2 and 4 and columns ESTUNIT and STRATA, passing variables
+STRATA <- "STRATA"
+#strlut[c(2,4), list(get(eval(unitvar)), get(STRATA))]
+
+strlut[c(2,4), list(get(eval(unitvar)), get(eval(STRATA)))]
+
+# Subset a column and add another column that is product of 2 other columns
+strlut[, list(ESTUNIT, newcol = ESTUNIT + STRATA)]
+
+# Subset a column and add another column that is product of 2 other columns, passing vars 
+strlut[, .(get(eval(unitvar)), newcol = get(unitvar) + get(strvar))]
+
+
+## Get a count by ESTUNIT and STRATA
+strlut[, table(ESTUNIT, STRATA)]
+#makes a table
+
+## or passing variables
+strlut[, table(get(unitvar), get(strvar))]
+
+
+## Add a column names STRWT that is proportion of ACRES by ESTUNIT
+microbenchmark( strlut[,STRWT:=ACRES/sum(ACRES), by=ESTUNIT],
+strlut.dplyr <-
+  strlut %>%
+  group_by(ESTUNIT) %>%
+  mutate(STRWT = ACRES/sum(ACRES)))
+
+strlut.dplyr <-
+  strlut %>%
+  group_by(ESTUNIT) %>%
+  mutate(STRWT = ACRES/sum(ACRES))
+
+## Passing variables
+strlut[, STRWT:=get(eval(acrevar))/sum(get(eval(acrevar))), by=get(eval(unitvar))]
+
+## Changing names of columns
+setnames(strlut2, "NBRPLOTS", "n.strata")
+
+## Subset unique values
+subset(unique(strlut), select = unitvar)
+
+## Get number of unique values
+strlut[, uniqueN(get(unitvar))]
+
+
+## Set column order
+#setcolorder(strlut, c("ESTUNIT", "STRATA", "STRWT", "ACRES"))
+
+
+```
+
+<br>
+
+<a name="sumgrp"></a>
+###Data Exploration - Sum data by group<br>
+
+```{r}
+
+# Compare tapply and data.table method for speed
+# Note: On small dataset, tapply is faster, but on larger dataset, the other is faster
+
+tapply(strlut$ACRES, strlut$STRATA, sum)  ## data.frame method
+strlut[, sum(ACRES), by=STRATA]           ## data.table method
+
+# Using small dataset
+microbenchmark(
+  tapply(strlut$ACRES, strlut$STRATA, sum),
+  strlut[, sum(ACRES), by=STRATA]
+)
+
+## Using larger dataset
+microbenchmark(
+  tapply(tree.df$BA, tree.df$PLT_CN, sum),
+  tree.dt[, sum(BA), by=PLT_CN]
+)
+
+
+# Add a new column to data table by group (sum of basal area by species)
+tree.dt[, sumba:=sum(BA, na.rm=TRUE), by=SPCD]
+head(tree.dt)
+
+# Remove a column from data table
+tree.dt[,sumba:=NULL]
+head(tree.dt)
+
+# To pass a new column variable name in
+newcol <- "sumba"
+tree.dt[, (newcol):=sum(BA, na.rm=TRUE), by=SPCD]
+head(tree.dt)
+
+
+# Remove a column using a passed in variable 
+tree.dt[, (newcol):=NULL]
+head(tree.dt)
+
+
+# Create a new data table with sum of basal area by species 
+sumba <- tree.dt[, sum(BA, na.rm=TRUE), by=SPCD]
+sumba
+
+# Create a new data table (with new name) with sum of basal area by species 
+spba <- tree.dt[, .(sumba=sum(BA, na.rm=TRUE)), by=SPCD]
+spba
+
+# Create a new data table (with new name) with sum of basal area by species - passing variable
+ba <- "BA"
+spba <- tree.dt[, list(sumba=sum(get(ba), na.rm=TRUE)), by=SPCD]
+spba
+
+
+# Sum basal area by 1 group (species=202)
+tree.dt[SPCD==202, sum(BA, na.rm=TRUE)]
+
+
+# Get a count of species that fall within height ranges (to nearest 10 ft) for
+# height classes greater than 10.
+#.N =freq
+tree.dt[HT > 10, list(Count = .N), by = list(HTCL = 10 * round(HT / 10))]
+
+
+## Calculate sum of BA by SPCD and HTCL (from above) 
+tree.dt[HT > 10, .(sum(BA)), by = list(SPCD, HTCL = 10 * round(HT / 10))]
+
+## Get sum of BA and number of trees by STATUSCD and by PLT_CN
+tree.dt[PLT_CN==282479222489998, {
+	sumba = sum(BA, na.rm=TRUE)
+	n = .N
+	.SD[, .(n, .N, sumba_in_STATUSCD = sum(BA, na.rm=TRUE), sumba_in_PLT=sumba), by=STATUSCD] }, 
+	by=PLT_CN]
+
+
+
+## Perform more than 1 operation on a column within a data.table
+tree.dt[, {tmp1=BA*TPA_UNADJ; tmp2=mean(tmp1, na.rm=TRUE); tmp3=round(tmp2, 2)}, by=SPCD]
+
+## Keep more than one variable
+tree.dt[, {tmp1=BA*TPA_UNADJ; tmp2=mean(tmp1, na.rm=TRUE); tmp3=round(tmp2, 2);   list(tmp2=tmp2, tmp3=tmp3)}, by=SPCD]
+
+
+## Multiply multiple columns by a constant
+t1 <- copy(tree.dt)
+t2 <- copy(tree.dt)
+t3 <- copy(tree.dt)
+t4 <- copy(tree.dt)
+vars2convert <- c("CARBON_BG", "CARBON_AG")
+microbenchmark(
+    for(j in vars2convert){ set(t1, i=NULL, j=j, value=t1[[j]] * 1000) },
+    t2[, (vars2convert) := lapply(.SD, function(x) x * 1000 ), .SDcols=vars2convert],
+    t3[, (vars2convert) := lapply(.SD, "*", 1000 ), .SDcols=vars2convert],
+    t4[, (vars2convert) := get(eval(vars2convert)) * 1000]
+)
+t1[1:2, c("PLT_CN", "TREE", vars2convert), with=FALSE]
+t2[1:2, c("PLT_CN", "TREE", vars2convert), with=FALSE]
+t3[1:2, c("PLT_CN", "TREE", vars2convert), with=FALSE]
+t4[1:2, c("PLT_CN", "TREE", vars2convert), with=FALSE]
+
+
+    ## CHANGE NA VALUES TO 0
+#    for(col in tsumvarnmlst2) set(sumdat, which(is.na(sumdat[[col]])), col, 0) 
+
+
+```
+
+
+
+<br>
+
+###Using Keys<br>
+
+```{r}
+
+# Set key for tree.dt as SPCD
+setkey(tree.dt, SPCD)
+
+# or if passing variable
+var <- "SPCD"
+setkeyv(tree.dt, var)
+
+
+# Get sum basal area for spcd = 202
+tree.dt[SPCD==202, sum(BA, na.rm=TRUE)]
+
+# Get sum basal area for all species
+tree.dt[, sum(BA, na.rm=TRUE), by=SPCD]
+
+# Get sum of basal area, average height, maximum height, maximum diameter by species
+# by= and keyby=  both retain row order within groups (by-order of first appearance)
+
+key(tree.dt)
+spsum <- tree.dt[,list(sumba=sum(BA, na.rm=TRUE),
+              avght=mean(HT, na.rm=TRUE),
+              maxht=max(HT, na.rm=TRUE),
+              maxdia=max(DIA, na.rm=TRUE)), by=key(tree.dt)]
+spsum
+
+spsum2 <- tree.dt[,list(sumba=sum(BA, na.rm=TRUE),
+              avght=mean(HT, na.rm=TRUE),
+              maxht=max(HT, na.rm=TRUE),
+              maxdia=max(DIA, na.rm=TRUE)), keyby=key(tree.dt)]
+spsum2
+
+# For just one species
+# Note: Because key is numeric, must include list or J in front of category
+sp202 <- tree.dt[list(202),list(sumba=sum(BA, na.rm=TRUE),
+              avght=mean(HT, na.rm=TRUE),
+              maxht=max(HT, na.rm=TRUE),
+              maxdia=max(DIA, na.rm=TRUE)), keyby=key(tree.dt)]
+sp202
+
+# Without specifying key
+sp202 <- tree.dt[list(202),list(sumba=sum(BA, na.rm=TRUE),
+              avght=mean(HT, na.rm=TRUE),
+              maxht=max(HT, na.rm=TRUE),
+              maxdia=max(DIA, na.rm=TRUE))]
+sp202
+
+
+# For two species
+microbenchmark(
+sp202_746 <- tree.dt[list(c(202,746)),list(sumba=sum(BA, na.rm=TRUE),
+              avght=mean(HT, na.rm=TRUE),
+              maxht=max(HT, na.rm=TRUE),
+              maxdia=max(DIA, na.rm=TRUE)), by=.EACHI],
+sp202_746 <- tree.dt[list(c(202,746)),list(sumba=sum(BA, na.rm=TRUE),
+              avght=mean(HT, na.rm=TRUE),
+              maxht=max(HT, na.rm=TRUE),
+              maxdia=max(DIA, na.rm=TRUE)), by=key(tree.dt)])
+sp202_746
+
+
+# All species
+spall <- tree.dt[,list(sumba=sum(BA, na.rm=TRUE),
+              avght=mean(HT, na.rm=TRUE),
+              maxht=max(HT, na.rm=TRUE),
+              maxdia=max(DIA, na.rm=TRUE)), by=key(tree.dt)]
+spall
+
+
+```
+
+<br>
+
+###Joining Tables<br>
+
+Join type   DT syntax         Merge
+INNER       X[Y, nomatch=0]   merge(X,Y,all=FALSE)
+LEFT OUTER  Y[X]              merge(X,Y,all.x=TRUE)
+RIGHT OUTER X[Y]              merge(X,Y,all.y=TRUE)
+FULL OUTER  -                 merge(X,Y,all=TRUE)
+
+```{r}
+
+## Testing different ways of merging
+setkey(tree.dt, SPCD)
+ref_spcd <- setDT(ref_spcd, key="VALUE")
+
+microbenchmark(
+  a1 <- merge(tree.df, ref_spcd, by.x="SPCD", by.y="VALUE"), # using merge with data frame
+  a2 <- merge(tree.dt, ref_spcd, by.x="SPCD", by.y="VALUE"), # using merge with data table
+  a3 <- tree.dt[ref_spcd, on=c(SPCD="VALUE"), nomatch=0],    # using on with data table
+  a4 <- tree.dt[ref_spcd, nomatch=0L],                       # using on with data table and keys
+  setDT(tree.dt)[ref_spcd, on=c(SPCD="VALUE")],
+  a5 <- inner_join(x=tree.df, y=ref_spcd, by = c("SPCD"="VALUE"))
+  
+)
+
+## Testing group with merge as separate commands vs in same command
+key(a4)
+a4 <- tree.dt[ref_spcd, nomatch=0L]
+a4[, sum(BA, na.rm=TRUE), by=key(a4)]
+
+tree.dt[ref_spcd, nomatch=0, sum(BA, na.rm=TRUE), by=key(tree.dt)]
+#or
+merge.dt <- merge(tree.dt[,c("PLT_CN", "SPCD", "BA"), with=FALSE], ref_spcd, by.x="SPCD", by.y="VALUE")
+head(merge.dt)
+
+cols <- c("PLT_CN", "SPCD", "BA")
+merge.dt <- merge(tree.dt[,cols, with=FALSE], ref_spcd, by.x="SPCD", by.y="VALUE")
+head(merge.dt)
+
+## Test difference between data.frame and data.table
+# microbenchmark(
+#   merge.df <- merge(tree.df[,c("PLT_CN", "SPCD", "BA")], ref_spcd, by.x="SPCD", by.y="VALUE"),
+#   merge.dt <- merge(tree.dt[,c("PLT_CN", "SPCD", "BA"), with=FALSE], ref_spcd, by.x="SPCD", by.y="VALUE")
+# )
+  
+microbenchmark(
+  a4 <- tree.dt[ref_spcd, nomatch=0L],
+  a4[, sum(BA, na.rm=TRUE), by=key(a4)],
+  tree.dt[ref_spcd, nomatch=0, sum(BA, na.rm=TRUE), by=key(a4)]
+)
+
+
+
+## Merging a subset of one data table to another data table
+a4 <- tree.dt[ref_spcd, nomatch=0L] 
+
+
+## Add a new column to first data.table in merge using columns from second data.table
+setkey(strlut, ESTUNIT, STRATA)
+setkey(strlut2, ESTUNIT, STRATA)
+strlut[strlut2, newcol:=ACRES*NBRPLOTS]
+
+
+```
+
+<br>
+
+###Symbols (.N, .SD, .I, .BY, .GRP)<br>
+
+```{r}
+
+# Frequency table (Number of records by SPCD)
+tree.dt[, .N, by=SPCD]
+
+# Frequency table (Number of records by SPCD) - with named column
+tree.dt[, .(NBR=.N), by=SPCD]
+
+# Frequency table (Number of records by SPCD)
+tree.dt[, as.data.table(table(SPCD))]
+
+
+# Frequency table by 2 columns (Number of records by SPCD)
+tree.dt[,.N, by=list(SPCD, STATUSCD)]
+tree.dt[, as.data.table(table(SPCD, STATUSCD))]
+
+## Passing variables
+var1 <- "SPCD"
+var2 <- "STATUSCD"
+vars <- c(var1, var2)
+
+tree.dt[,.N, by=c(var1, var2)]
+tree.dt[,.N, by=vars]
+tree.dt[,.(Freq=.N), by=vars]
+tree.dt[SPCD %in% c(202, 746),.(Freq=.N), by=vars]
+
+
+tree.dt[, as.data.table(table(get(var1), get(var2)))]
+
+
+## Get PLT_CN values where there are more than 50 live trees
+tuniqueid <- "PLT_CN"
+tree.dt[STATUSCD == 1, (.N > 100), by=c(tuniqueid, "STATUSCD")][V1==TRUE][[tuniqueid]]
+
+## Check results
+tplt <- tree.dt[PLT_CN == 40405497010690]
+dim(tplt)
+
+tplt2 <- tree.dt[PLT_CN == 40406999010690]
+dim(tplt2)
+
+## Changing values of columns (ex. NA values to 0 values)
+#na.to.0 <- function(x){x[is.na(x)] <- 0; x}
+#sumtreef.prop[, (tdomscols) := lapply(.SD, na.to.0), .SDcols=tdomscols]
+
+## this is faster
+#for(col in tdomscols) set(sumtreef.prop2, which(is.na(sumtreef.prop2[[col]])), col, 0)
+#DANGER ZONE
+
+```
+
+```{r}
+mean.ht.dt <- tree.dt[,list(mean= mean(HT, na.rm=TRUE)), by="SPCD"]
+
+mean.ht.dt2 <- tree.dt[,mean:= mean(HT, na.rm=TRUE), by="SPCD"]
+
+library(ggplot2)
+ggplot(mean.ht.dt, aes(y=mean, x=as.factor(SPCD))) + geom_bar(stat="identity")
+```
+

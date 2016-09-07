@@ -1,0 +1,101 @@
+## Git - Distributed Version Control Systems (DVCSs) - mirror or clone the repository each time.
+# There are 3 main states that files reside in:
+committed - safely stored in local database
+modified - a file has been changed, but not committed
+staged - a file has been modified and marked to be committed
+So, first, check out (pulled) file from Git directory to working directory, and modify on disk...  
+then put it in staging area, where an index is created of changes, then commit (save) back to Git directory.
+
+## Command line
+#########################################################################################
+
+## To configure the default text editor
+git config --global core.editor "'C:/Program Files/Windows NT/Accessories/wordpad.exe' -multiInst -nosession"
+
+## To look at config settings
+git config --list
+
+## To bring up gui window 
+git gui
+
+## Getting help
+# git help <verb>
+# git <verb> --help
+# man git-<verb>
+
+## To clone a repository.. 
+## First, create repository on GitHub; then, go (cd) to directory you want the repository in, then:
+## This, pulls down all the data for that repository and checks out a working copy of the latest version.
+# git clone <repository>
+# git clone <repository> <newname>
+cd C:/_tsf/_GitHub
+git clone https://github.com/tfrescino/FIESTA
+
+## To check status of files. 
+# git status <repository>
+cd FIESTA
+git status
+
+## To add a new file or directory to repository or to stage a modified file.
+## If a file is modified after it is added, it must be added again before committing. 
+# git add <filenm>
+
+## Short status
+git status -s
+?? - new files that are not tracked yet
+A - new files that have been added to staging area
+M - modified files
+
+## To ignore certain files, set up a .gitignore file 
+## (for examples, see: https://github.com/github/gitignore)
+cat .gitignore
+*.[oa]		# ignore files ending in ".o" or ".a"
+
+## To see exact lines of what you have changed, but not staged, 
+## or what you have staged that you are about to commit.
+git diff
+
+## To see what you have staged that will go into your next commit
+git diff --staged
+
+## To commit changes
+git commit -m "Comment of changes"
+
+## To skip the staging area..  becareful not to include unwanted changes
+git commit -a
+
+## To remove a file
+git rm <filenm>
+
+## To keep a file in hard drive, but not have Git track it anymore
+git rm --cached <filenm>
+
+## Undoing
+
+## To change the commit message if you have made no changes since last commit.
+git commit --amend
+
+## To push changes to GitHub
+## git push <origin> <repository>
+git push FIESTA https://github.com/tfrescino/FIESTA
+
+## To open text file from command prompt
+start <filenm>
+
+
+##############################################################################
+## So, the routine would be, if modifying 2 files:
+##############################################################################
+start <file1nm>		## modify file1nm
+git add <file1nm>	## stage file1nm
+
+start <file2nm>		## modify file2nm
+git add <file2nm>	## stage file2nm
+
+git commit -m "Comment of changes"
+git push FIESTA https://github.com/tfrescino/FIESTA
+
+
+
+
+
