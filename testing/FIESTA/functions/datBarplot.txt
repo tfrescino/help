@@ -1,0 +1,57 @@
+## datBarplot
+#####################
+gui=FALSE
+#x
+xvar=NULL
+yvar="FREQ"
+grpvar=NULL
+errbars=FALSE
+x.order=NULL
+sevar=NULL
+cvvar=NULL
+device.type="default"
+jpeg.res=300
+device.height=5
+device.width=8
+horiz=FALSE
+toplabels=NULL
+ylim=NULL
+ylabel=NULL
+xlabel=NULL
+mar=NULL
+addlegend=FALSE
+main=NULL
+cex.main=1
+cex.label=1
+cex.names=0.8
+las.xnames=NULL
+savedata=FALSE
+outfolder=NULL
+outfn=NULL
+
+x=spptab
+xvar="SPCD"
+yvar="NBRTREES"
+x.order="DESC"
+main="Number of trees"
+ylabel="Number of trees"
+xlabel="Tree species"
+col="blue"
+
+
+##anGBestSppByYear
+x=tab
+xvar="yr"
+yvar="est"
+errbars=TRUE
+order.d=FALSE
+cvvar="Sample Error" 
+barplot.ht=10
+barplot.width=length(invyrs)
+ylabel=ylab
+toplabels=NULL
+ylim=NULL 
+main=title.main
+savedata=savedata
+outfolder=outfolder
+

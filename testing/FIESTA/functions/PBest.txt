@@ -1,0 +1,297 @@
+## PBest
+#####################
+gui=FALSE
+#pnt
+pltstrat=NULL
+pntid="point_id"
+puniqueid="plot_id"
+landarea="ALL"
+landarea.filter=NULL
+pnt.filter=NULL
+nonsamp.filter=NULL
+plt.filter=NULL
+stratalut=NULL
+totacres=NULL
+strvar=NULL
+acrevar=NULL
+unitvar=NULL
+rowvar=NULL
+rowvar.filter=NULL
+colvar=NULL
+colvar.filter=NULL
+row.orderby=NULL
+col.orderby=NULL
+tabtype="COVER"
+allin1=FALSE
+savedata=FALSE
+outfolder=NULL
+outfn=NULL
+addtitle=TRUE
+title.main=NULL
+title.ref=NULL
+title.filter=NULL
+title.rowvar=NULL
+title.colvar=NULL
+title.unitvar=NULL
+#domlut=NULL
+domvarlst=NULL
+rawdata=FALSE
+fvars2keep=NULL
+estround=NULL
+cvround=NULL
+condid="CONDID"
+esttype="PHOTO"
+adjacre=FALSE
+estround=2
+cvround=2
+nullcheck=FALSE
+nonresp=FALSE
+row.FIAname=FALSE
+col.FIAname=FALSE
+
+pnt <- copy(ice)
+rowvar <- "cover_1"
+domlut <- domlut
+totacres <- 54335029
+Npts <- 5
+nonsamp.filter <- paste(rowvar, "!= 999")
+rawdata <- TRUE
+colvar="cover_2"
+allin1=TRUE
+add0=TRUE
+pnt.filter <- "cover_1 < 200"
+
+
+
+est <- PBest(pnt=pnt, rowvar=rowvar, domlut=domlut, totacres=totacres, Npts=5, 
+	puniqueid="CN", nonsamp.filter=nonsamp.filter, rawdata=TRUE, allin1=TRUE, add0=TRUE)
+
+
+dom <- "use_1"
+domnm <- paste(dom, "nm", sep="_")
+pnt.filter <- NULL
+endfn <- "DET"
+title.ref2 <- paste(title.ref, endfn, sep=" - ")
+#nonsamp.filter <- nonsampDET.filter
+nonsamp.filter <- "!use_1 %in% 999"
+iceDET <- ice
+iceDET[iceDET[,dom] %in% nonsampDET, dom] <- 9999
+iceDET[iceDET[,dom] == 9999, domnm] <- "GENERAL"
+
+outfn <- paste(title.filter, Nptsfn, dom, landarea, endfn, sep="_")
+
+pnt=iceDET
+pltstrat=plt
+rowvar=dom
+title.ref=title.ref2
+rawdata=TRUE
+savedata=TRUE
+outfolder=outfolder
+outfn=outfn
+
+
+
+
+
+
+
+
+dom <- "use_1"
+pnt.filter <- paste(dom, "> 0 &", dom, "< 200")
+title.filter <- "LU_Natural"
+
+Nptsfn <- "5pts"
+endfn <- "ALL"    
+title.ref2 <- paste(title.ref, endfn, sep=" - ")
+nonsamp.filter <- nonsampALL.filter
+outfn <- paste(title.filter, Nptsfn, dom, landarea, endfn, sep="_")
+
+pnt=ice
+pltstrat=plt
+rowvar=dom
+pnt.filter=pnt.filter
+nonsamp.filter=nonsamp.filter
+title.filter=title.filter
+title.ref=title.ref2
+rawdata=rawdata
+domlut=domlut
+savedata=TRUE
+outfolder=outest
+outfn=outfn
+treef=NULL
+
+
+
+dom <- "use_1"
+pnt.filter <- paste(dom, "> 0 &", dom, "< 200")
+title.filter <- "LU_Natural"
+
+dom <- "use_1_INT"
+#print(table(subset(ice, eval(parse(text = pnt.filter)), select=dom)))
+endfn <- "INT"
+title.ref2 <- paste(title.ref, endfn, sep=" - ")
+#nonsamp.filter <- nonsampINT.filter
+nonsamp.filter <- NULL
+
+outfn <- paste(title.filter, Nptsfn, dom, landarea, endfn, sep="_")
+pnt=ice
+pltstrat=plt
+rowvar=dom
+pnt.filter=pnt.filter
+nonsamp.filter=nonsamp.filter
+title.filter=title.filter
+title.ref=title.ref2
+rawdata=rawdata
+domlut=domlut
+savedata=TRUE
+outfolder=outfolder
+outfn=outfn
+
+
+######################################
+dom <- "use_1"
+pnt.filter <- paste(dom, "> 0 &", dom, "< 200")
+print(table(subset(ice, eval(parse(text = pnt.filter)), select=dom)))
+nonsamp.filter <- paste("!", dom, " %in% c(999)", sep="")
+endfn <- "ALL"    
+title.ref <- paste(title.ref, endfn, sep=" - ")
+
+pnt=ice
+pltstrat=plt2
+rowvar=dom
+pnt.filter=pnt.filter
+nonsamp.filter=nonsampALL.filter
+title.filter=title.filter
+rawdata=TRUE
+
+##### pcheck.data
+esttype="PHOTO"
+cond=pnt
+pltstrat=plt
+cuniqueid=cuniqueid
+puniqueid=puniqueid
+ACI=FALSE
+cond.filter=pnt.filter
+unitvar2=NULL
+FIA=FALSE
+nonresp=FALSE
+substrvar=NULL
+cvars2keep=cvars2keep
+nullcheck=FALSE
+adjstrat=FALSE
+condid="CONDID"
+adjacre=FALSE
+
+#######################################
+
+pnt=pnt
+Npts=1
+rowvar=dom
+domlut=domlut
+savedata=TRUE
+outfolder=outfolder
+nonsamp.filter=nonsamp.filter
+outfn=paste(outfn, "1pt", "allland", sep="_")
+title.rowvar=title.rowvar
+title.ref=paste(title.ref, "- 1pt")
+
+
+## pcheck.data
+tuniqueid=NULL
+condid="CONDID"
+landarea=NULL
+adjstrat=TRUE
+acreadj=FALSE
+cond.filter=NULL
+ 
+## pcheck.data
+esttype="PHOTO"
+cond=pnt
+pltstrat=plt
+cuniqueid=cuniqueid
+puniqueid=puniqueid
+ACI=FALSE
+landarea.filter=landarea.filter
+nonsamp.filter=nonsamp.filter
+cond.filter=pnt.filter
+plt.filter=plt.filter
+totacres=totacres
+stratalut=stratalut
+acrevar=acrevar
+strvar=strvar
+unitvar=unitvar
+unitvar2=NULL
+FIA=FALSE
+nonresp=FALSE
+substrvar=NULL
+cvars2keep=cvars2keep
+nullcheck=FALSE
+adjstrat=FALSE
+adjacre=FALSE
+#######################################
+
+
+
+pnt=datpnt
+pntid="POINT_ID"
+landarea="ALL"
+tabtype="ACRES"
+rowvar="CHANGEBIN"
+totacres=totacres
+stratalut=NULL
+rawtable=TRUE
+allin1=FALSE
+savedata=TRUE
+outfolder=outfolder
+outfn=outfn
+title.main=main
+nonsamp.filter=nonsamp.filter.t2_change.s2
+
+
+
+
+
+pnt <- datplt
+pntid="PLOT_ID"
+landarea="ALL"
+tabtype="ACRES"
+Npts=1
+rowvar="CHANGEBIN"
+totacres=totacres
+stratalut=NULL
+rawtable=TRUE
+allin1=FALSE
+savedata=TRUE
+outfolder=outfolder
+outfn=outfn
+title.main=main
+nonsamp.filter=nonsamp.filter.change.s1
+
+
+pnt <- indat
+plt <- plt2
+rip <- FALSE
+addtitle <- TRUE
+savedata <- TRUE
+allin1=FALSE
+
+totacres=63288883
+rowvar="FORTYPNM"
+rowvar.filter="FORTYP > 100"
+colvar=NULL
+colvar="SPP"
+colvar.filter="SPP %in% c('White fir', 'Down dead', 'Sage Complex')"
+outfolder <- "C:/_tsf/workspace/FIestA/_testing/PBests/FIESTA"
+
+
+test <- PBest_nonratio(pnt=pnt, plt=plt, pntid=pntid, puniqueid=puniqueid, condid=condid, Npts=Npts, landarea=landarea, 
+	landarea.filter=landarea.filter, pnt.filter=pnt.filter, nonsamp.filter=nonsamp.filter, stratalut=stratalut, 
+	totacres=totacres, strvar=strvar, acrevar=acrevar, unitvar=unitvar, rowvar=rowvar, rowvar.filter=rowvar.filter, 
+	colvar=colvar, colvar.filter=colvar.filter, row.orderby=row.orderby, col.orderby=col.orderby, tabtype=tabtype,
+	allin1=allin1, savedata=savedata, parameters=parameters, outfolder=outfolder, outfn=outfn, addtitle=addtitle, 
+	title.ref=title.ref, title.rowvar=title.rowvar, title.colvar=title.colvar, title.unitvar=title.unitvar, 
+	vars2keep=vars2keep, domvarlst=domvarlst, domvarnmlst=domvarnmlst, rawtable=rawtable)
+est2 <- test$estratio
+cv2 <- test$cvratio
+
+

@@ -1,0 +1,264 @@
+## GBestRatio
+#####################
+gui=FALSE
+#tree=NULL
+#cond=NULL
+#pltstrat=NULL
+tuniqueid="PLT_CN"
+cuniqueid="PLT_CN"
+puniqueid="CN"
+FIA=FALSE
+ACI=FALSE
+landarea="FOREST"
+cond.filter=NULL
+plt.filter=NULL
+nonsamp.filter=NULL
+#stratalut=NULL
+totacres=NULL
+strvar="STRATA"
+nonresp=FALSE
+substrvar=NULL
+acrevar="ACRES"
+unitvar="ESTUNIT"
+ratiotype="PERACRE"
+#estvarn=NULL
+estvarn.TPA=TRUE
+#estvarn.filter=NULL
+estvarn.name=NULL
+estvard=NULL
+estvard.TPA=FALSE
+estvard.filter=NULL
+estvard.name=NULL
+rowvar=NULL
+rowvar.filter=NULL
+colvar=NULL
+colvar.filter=NULL
+row.FIAname=FALSE
+col.FIAname=FALSE
+row.orderby=NULL
+col.orderby=NULL
+allin1=FALSE
+savedata=FALSE
+parameters=FALSE
+#outfolder=NULL
+outfn=NULL
+addtitle=TRUE
+title.main=NULL
+title.ref=NULL
+title.rowvar=NULL
+title.colvar=NULL
+title.unitvar=NULL
+title.estvarn=NULL
+title.estvard=NULL
+title.filter=NULL
+rawtable=FALSE
+counts=FALSE
+estround=3
+cvround=3
+adjstrat=TRUE
+adjacre=FALSE
+saveadj=FALSE
+estnm=NULL
+cvnm=NULL
+add0=FALSE
+savetitle=FALSE
+
+cond=WYcond
+tree=WYtree
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+rowvar="SPCD"
+#colvar=NULL
+#rowvar="FORTYPCD"
+colvar="STDSZCD"
+#rowvar="OWNGRPCD"
+#colvar="DSTRBCD1"
+estvarn="TPA_UNADJ"
+#estvarn="VOLCFNET"
+estvarn.TPA=FALSE
+estvarn.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref="Wyoming, 2011-2012"
+savedata=FALSE
+outfolder=outfolder
+rawdata=TRUE
+allin1=TRUE
+estround=4
+cvround=6
+esttype="RATIO"
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+ratiotype="PERACRE"
+estvarn="TPA_UNADJ"
+estvarn.TPA=FALSE
+estvarn.filter="STATUSCD == 1"
+title.ref=title.ref
+savedata=TRUE
+rawdata=TRUE
+
+
+
+yn=estvarn.name
+yd=estvard.name
+dat=tdomdat
+esttype="RATIO"
+uniqueid=tuniqueid
+domain="TOTAL"
+
+
+cond=WYcond
+tree=WYtree
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+#rowvar="SPCD"
+#colvar=NULL
+rowvar="FORTYPCD"
+colvar="STDSZCD"
+#rowvar="OWNGRPCD"
+#colvar="DSTRBCD1"
+estvarn="TPA_UNADJ"
+#estvarn="VOLCFNET"
+estvarn.TPA=FALSE
+estvarn.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref="Wyoming, 2011-2012"
+savedata=FALSE
+outfolder=outfolder
+rawdata=TRUE
+allin1=TRUE
+estround=4
+cvround=6
+esttype="RATIO"
+
+estvard="TPA_UNADJ"
+estvard.TPA=FALSE
+ratiotype="PERTREE"
+
+
+
+system.time(
+test <- GBestRatio(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	estvarn="TPA_UNADJ", estvarn.TPA=FALSE, 
+	estvarn.filter="STATUSCD == 1", title.ref=title.ref,
+	savedata=FALSE)
+)
+
+
+system.time(
+test <- GBestRatio(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="FORTYPCD", estvarn="TPA_UNADJ", estvarn.TPA=FALSE, 
+	estvarn.filter="STATUSCD == 1", row.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE)
+)
+
+system.time(
+test <- GBestRatio(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="FORTYPCD", colvar="STDSZCD", estvarn="TPA_UNADJ", estvarn.TPA=FALSE, 
+	estvarn.filter="STATUSCD == 1", row.FIAname=TRUE, col.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE)
+)
+
+system.time(
+test <- GBestRatio(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="FORTYPCD", colvar="STDSZCD", estvarn="TPA_UNADJ", estvarn.TPA=FALSE, 
+	estvarn.filter="STATUSCD == 1", estvard="TPA_UNADJ", estvard.TPA=FALSE, 
+	row.FIAname=TRUE, col.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE, ratiotype="PERTREE")
+)
+
+system.time(
+test <- GBestRatio(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="SPCD", colvar="STDSZCD", estvarn="TPA_UNADJ", estvarn.TPA=FALSE, 
+	estvarn.filter="STATUSCD == 1", row.FIAname=TRUE, col.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE)
+)
+
+
+
+
+## GBestgroup
+datorig.n <- tdomdatn[tdomdatn[,unitvar] == 3,]
+#datorig.d <- tdomdatd[tdomdatd[,unitvar] == 1,]
+domain="TOTAL"
+group=estvarn.name
+esttype="RATIO"
+datorig.d=tdomdatd
+group.d=estvard.name
+
+xstrat.n <- datorig.n[datorig.n[,strvar] == 1,]
+xdom.n <- xstrat.n[xstrat.n[,domain] == "1",]
+xdom.d <- xstrat.d[xstrat.d[,domain] == "1",]
+
+## NEW
+xdom.n <- datorig.n[datorig.n[,domain] == "1",]
+xdom.d <- xstrat.d[xstrat.d[,domain] == "1",]
+
+xstrat.n <- xdom.n[xdom.n[,domain] == "1",]
+
+
+x.n <- datorig.n[datorig.n[,strvar] == 1,]
+x.d <- datorig.d[datorig.d[,strvar] == 1,]
+
+
+
+uniqueid=tuniqueid
+#domain="FORTYPNM_STDSZNM"
+#group="CONDPROP_ADJ"
+domain="TOTAL"
+
+
+estvard="TPA_UNADJ"
+estvard.TPA=FALSE
+
+FIA=FALSE
+unitvar="ESTUNIT"
+
+estvarn.filter=" STATUSCD == 2 & DIA >= 5.0"
+
+
+group = sort(tdomvarlstn)
+
+
+## To test GBest_nonratio
+group = "TPA_UNADJ_SUM"
+datorig = tdomdatn[tdomdatn$ESTUNIT == 1,]
+
+group.n = "TPA_UNADJ_SUM"
+datorig.n = tdomdatn[tdomdatn$ESTUNIT == 1,]
+ratiotype="PERACRE"
+group.d=NULL
+datorig.d=NULL
+unit=1
+
+
+## GBest.group
+datorig <- tdomdatn[tdomdatn$ESTUNIT == 1,]
+uniqueid=tuniqueid
+domain="TOTAL"
+group=estvarn.name
+esttype="RATIO"
+datorig.d=tdomdatd
+group.d=estvard.name
+
+
+## GBest.ratio
+group.n="CONDPROP_ADJ"
+datorig.n <- datorig
+group.d=NULL
+domNames = NULL
+
+## GBest.pbarfun
+x.n = datorig[datorig$STRATA == 1,]
+

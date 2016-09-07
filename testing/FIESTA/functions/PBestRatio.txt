@@ -1,0 +1,68 @@
+## PBestRatio
+#####################
+gui=FALSE
+#pnt
+pltstrat=NULL
+pntid="point_id"
+puniqueid="plot_id"
+phototype="COVER"
+landarea="ALL"
+landarea.filter=NULL
+pnt.filter=NULL
+nonsamp.filter=NULL
+plt.filter=NULL
+stratalut=NULL
+totacres=NULL
+strvar=NULL
+acrevar=NULL
+unitvar=NULL
+domain=NULL
+domain.filter=NULL
+attribute=NULL
+attribute.filter=NULL
+dom.orderby=NULL
+att.orderby=NULL
+allin1=FALSE
+savedata=FALSE
+outfolder=NULL
+outfn=NULL
+addtitle=TRUE
+title.main=NULL
+title.ref=NULL
+title.filter=NULL
+title.domain=NULL
+title.attribute=NULL
+title.unitvar=NULL
+#domlut=NULL
+domvarlst=NULL
+rawdata=FALSE
+fvars2keep=NULL
+estround=NULL
+cvround=NULL
+
+pnt <- ice
+domain <- "cover_1"
+attribute <- "cover_2"
+domlut <- domlut
+totacres <- 54335029
+Npts <- 5
+nonsamp.filter <- paste(domain, "!= 999")
+
+
+
+pnt=ice
+plt=plt
+rowvar=dom
+pnt.filter=pnt.filter
+nonsamp.filter=nonsamp.filter
+title.filter=title.filter
+title.ref=title.ref2
+rawdata=TRUE
+domlut=domlut
+savedata=TRUE
+outfolder=outfolder
+outfn=outfn
+
+
+
+

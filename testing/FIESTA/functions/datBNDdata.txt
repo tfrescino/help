@@ -1,0 +1,20 @@
+## datBNDdata
+#####################
+gui=FALSE
+#shp=NULL
+bndlayer=NULL
+othertables=NULL
+uniqueid="PLT_CN"
+xytable=NULL
+x=NULL
+y=NULL
+prj=NULL
+datum=NULL
+zone=NULL
+prj4str=NULL
+savedata=FALSE
+outfolder=NULL
+
+shp=shp
+bndlayer=uinta
+othertables=c("plt", "cond", "tree", "actualc")

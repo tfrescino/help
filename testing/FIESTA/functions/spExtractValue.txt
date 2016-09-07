@@ -1,0 +1,79 @@
+## spExtractValue
+gui=FALSE
+#shp=NULL
+xytable=NULL
+uniqueid="PLT_CN"
+x=NULL
+y=NULL
+prj=NULL
+datum=NULL
+zone=NULL
+prj4str=NULL
+polylst=NULL
+polyfolder=NULL
+polyvarlst=NULL
+rastlst=NULL
+rastfolder=NULL
+rastbandlst=NULL
+rastoutnmlst=NULL
+extrtype="point"
+methodlst="simple"
+buffradius=NULL
+bfunlst=mean
+focalrast=FALSE
+focalmat=NULL
+ffunlst=mean
+focalsave=NULL
+focalfolder=NULL
+outfocalfnlst=NULL
+checknull=FALSE
+keepnull=FALSE
+savedata=FALSE
+#outfolder=NULL
+outfn=NULL
+
+shp=shpa2$ext
+rastlst=wcbio.tile
+
+
+shp=WYbtplts
+polylst="WYbt_distbnd.shp"
+polyfolder=spfolder 
+rastlst=c("WYbt_fornf.img", "WYbt_elevm.img")
+rastfolder=spfolder
+uniqueid="CN"
+
+
+
+
+shp=predshp
+rastlst=list(B5pred, FIpred, NBRpred, NDVIpred) 
+rastfolder="data/nafd_calibr_sts_v6"
+rastbandlst=band
+rastoutnmlst=list(pred.names)
+
+
+rastlst=TMmask
+rastfolder="data/nafd_calibr_sts_v6"
+rastoutnmlst="MASK"
+
+shp=predshp
+rastlst=B5pred
+rastfolder="data/nafd_calibr_sts_v6"
+rastbandlst=band
+
+shp=predshp
+rastlst=list(B5pred,FIpred)
+rastfolder <- "data/nafd_calibr_sts_v6"
+rastbandlst=band
+rastoutnmlst=list("B5pred","FIpred")
+
+shp=utshp1
+rastlst=lfpredlst[5:7]
+rastfolder=LFfolder
+
+
+shp=inlayerprj
+polylst = strlayer2
+uniqueid = "CN"
+polyvarlst = "VEG_GROUP1"

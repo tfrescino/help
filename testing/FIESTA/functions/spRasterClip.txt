@@ -1,0 +1,28 @@
+## spRasterClip
+gui=FALSE
+#polynm
+#rastfnlst
+#rastfolder=NULL
+bandlst=NULL
+NODATA=NULL
+align=FALSE
+asstack=TRUE
+rastmask=NULL
+savedata=FALSE
+#outfolder=NULL
+outfnlst=NULL
+outfnend="_clip"
+
+polynm=GBbndfn
+rastfnlst=stratafn
+savedata=TRUE
+outfolder=outfolder
+
+polyfn="W:/Techniques/Projects/FIestA/_testing/smallarea/spatial/poly1.shp"
+outfolder <- "C:/_tsf/workspace/smallarea/_outfolder"
+outfnlst <- "iw_ned30i_poly1r"
+
+
+polynm=polyfn
+rastfnlst= "W:/_Library/GIS/rmrs_fia/Data/Raster/LANDFIRE/Refresh2008_CONUS/IW_refresh/iw_ned30i.img"
+savedata=TRUE

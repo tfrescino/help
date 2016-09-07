@@ -1,0 +1,75 @@
+#plt=NULL
+#cond=NULL
+#tree=NULL
+puniqueid="CN"
+getstrata=FALSE
+strlut=NULL
+strvar="STRATA"
+acrevar="ACRES"
+states=NULL
+invyrs=NULL
+sppvar="SPCD"
+sppcd=NULL
+pltcond.filter=NULL
+estvar=NULL
+estvar.TPA=TRUE
+estvar.filter=NULL
+bplot=TRUE
+savedata=FALSE
+outfolder=NULL
+outfn=NULL
+title.main=NULL
+title.estvar=NULL
+title.spp=NULL
+
+
+sppvar <-"SPCD"
+sppnm <- "blue spruce"
+sppcd <- sort(ref_spcd[match(sppnm, ref_spcd$MEANING), "VALUE"])
+estvar <- "VOLCFNET"
+
+plt=WYpltstrat
+cond=WYcond
+tree=WYtree 
+sppvar=sppvar 
+sppcd=sppcd 
+strlut=WYstrlut
+estvar=estvar 
+estvar.filter="STATUSCD == 2" 
+title.estvar="Live volume" 
+title.spp=sppvar 
+savedata=FALSE
+bplot=FALSE
+
+
+tree=treex
+cond=condx
+pltstrat=dat
+puniqueid=puniqueid
+landarea="FOREST"
+stratalut=strlut
+unitvar="NONE"
+estvar=estvar
+estvar.TPA=estvar.TPA
+estvar.filter=estvar.filter
+rowvar="INVYR"
+colvar=colvar
+colvar.filter=colvar.filter
+col.FIAname=TRUE
+title.rowvar=title.rowvar
+title.colvar=title.spp
+title.estvar=title.estvar
+savedata=FALSE
+
+
+
+anGBestSppByYear(    plt=WYpltstrat, cond=WYcond, tree=WYtree, 
+sppvar=sppvar, 
+sppcd=sppcd, 
+strlut=WYstrlut,
+estvar = estvar,
+estvar.filter="STATUSCD == 2", 
+title.estvar="Live volume", 
+title.spp=sppvar, 
+savedata=FALSE, bplot=FALSE)
+

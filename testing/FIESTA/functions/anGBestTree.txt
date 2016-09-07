@@ -1,0 +1,73 @@
+## anGBestTree
+#####################
+gui=FALSE
+shp=NULL
+#tree=NULL
+cond=NULL
+plt=NULL
+stratalut=NULL
+totacres=NULL
+getdata=FALSE
+getstrata=FALSE
+FIA=TRUE
+ACI=FALSE
+datsource=NULL
+accessdb=NULL
+state=NULL
+cur10yrs=TRUE
+invyrs=NULL
+puniqueid="CN"
+landarea="ALL"
+cond.filter=NULL
+plt.filter=NULL
+estvar=NULL
+estvar.filter=NULL
+rowvar=NULL
+colvar=NULL
+allin1=FALSE
+savedata=FALSE
+outfolder=NULL
+outfn=NULL
+addtitle=TRUE
+title.ref=NULL
+title.filter=NULL
+rawtable=FALSE
+
+
+
+
+plt=pltstrat
+stratalut=strlut
+totacres=3568907
+puniqueid="PLT_CN"
+cond.filter="OWNCD == 11"
+estvar="DRYBIO_AG"
+estvar.filter="STATUSCD == 1"
+invyrs=2003:2006
+
+
+
+
+getdata=TRUE
+getstrata=TRUE
+states=state
+invyrs=invyr
+landarea="FOREST"
+cond.filter="RESERVCD == 1"
+estvar="FMORTCFAL"
+estvar.filter="FMORTCFAL > 0 & DIA > 5"
+title.filter="Reserved Land"
+title.ref="Wyoming, 2011-2012"
+savedata=TRUE
+outfolder=outfolder
+rowvar="NONE"
+
+
+
+#getdata=TRUE
+states="Wyoming"
+estvar="TPA_UNADJ"
+estvar.filter="STATUSCD == 1"
+rowvar="SPCD"
+colvar="OWNGRPCD"
+allin1=TRUE

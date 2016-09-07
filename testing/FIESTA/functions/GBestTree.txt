@@ -1,0 +1,777 @@
+## GBestTree
+#####################
+gui=FALSE
+#tree=NULL
+#cond=NULL
+#pltstrat=NULL
+tuniqueid="PLT_CN"
+cuniqueid="PLT_CN"
+puniqueid="CN"
+#stratalut=NULL
+adjacre=FALSE
+totacres=NULL
+strvar="STRATA"
+nonresp=FALSE
+substrvar=NULL
+acrevar="ACRES"
+unitvar=NULL
+adjstrat=TRUE
+FIA=FALSE
+landarea="FOREST"
+invyrs = NULL
+cond.filter=NULL
+nonsamp.filter=NULL
+#estvar=NULL
+#estvar.TPA=TRUE
+estvar.filter=NULL
+estvar.name=NULL
+rowvar=NULL
+rowvar.filter=NULL
+colvar=NULL
+colvar.filter=NULL
+row.FIAname=FALSE
+col.FIAname=FALSE
+row.orderby=NULL
+col.orderby=NULL
+allin1=FALSE
+savedata=FALSE
+#outfolder=NULL
+outfn=NULL
+addtitle=TRUE
+title.ref=NULL
+title.rowvar=NULL
+title.colvar=NULL
+title.unitvar=NULL
+title.estvar=NULL
+title.filter=NULL
+rawtable=FALSE
+add0=FALSE
+counts=FALSE
+estround=0
+cvround=2
+estvar.TPA=FALSE
+plt.filter=NULL
+ACI=FALSE
+cur10yrs=FALSE
+title.main=NULL
+esttype="TREE"
+unitvar2=NULL
+savetitle=TRUE
+savetitle=FALSE
+domlut=NULL
+domvarlst=NULL
+nullcheck=FALSE
+estnm=NULL
+cvnm=NULL
+esttype="TREE"
+allin1=TRUE
+
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+rowvar="SPCD"
+colvar="OWNGRPCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref=title.ref
+savedata=FALSE
+rawdata=TRUE
+title.rowvar="Species"
+title.colvar="Owner group"
+
+
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+title.ref=title.ref
+savedata=FALSE
+allin1=TRUE
+
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=FALSE
+rowvar="SPCD"
+rowvar="FORTYPCD"
+colvar="OWNGRPCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref=title.ref
+savedata=FALSE
+rawdata=TRUE
+title.rowvar="Forest type"
+title.colvar="Owner group"
+unitvar="ESTUNIT"
+
+
+## pcheck.esttree
+treef=treef
+condall=condall
+bytdom=bytdom
+tuniqueid=tuniqueid
+cuniqueid=cuniqueid
+esttype="TREE"
+estvarn=estvar
+estvarn.TPA=estvar.TPA
+estvarn.filter=estvar.filter
+estvarn.name=estvar.name
+tdomvar=tdomvar
+adjtpa=TRUE
+
+## datSumTreeDom
+tree=treef
+cond=condall
+tuniqueid=tuniqueid
+cuniqueid=cuniqueid
+bycond=TRUE
+tsumvar=estvarn
+TPA=estvarn.TPA
+tdomtot=TRUE
+tdomtotnm=NULL
+tfilter=estvarn.filter
+tdomvar=tdomvar
+tdomvarlst=NULL
+adjstrat=TRUE
+savedata=FALSE
+adjTPA=adjTPA
+plt=NULL
+presence=FALSE
+lbs2tons=TRUE
+tfun=sum
+tdomvar2=NULL
+adjplot="NONE"
+FIAname=FALSE
+tdomprefix=NULL
+tdombarplot=FALSE
+tround=6
+tdombarplot=FALSE
+proportion=FALSE
+
+
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+rowvar="FORTYPCD"
+row.FIAname=TRUE 
+title.ref=title.ref
+savedata=TRUE
+rawdata=TRUE
+
+FIA=FALSE
+unitvar="ESTUNIT"
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+title.ref=title.ref
+savedata=TRUE
+allin1=TRUE
+
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+rowvar="FORTYPCD"
+row.FIAname=TRUE
+title.ref=title.ref
+savedata=TRUE
+rawdata=TRUE
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+#stratalut=NULL
+FIA=TRUE
+landarea="TIMBERLAND"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 2 & AGENTCD == 20"
+rowvar="SPCD"
+colvar = "FORTYPCD"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref=title.ref
+savedata=FALSE
+rawdata=TRUE
+add0=TRUE
+FIA=TRUE
+unitvar="ESTUNIT"
+
+FIA=FALSE
+unitvar="ESTUNIT"
+
+
+totacres = 62600430
+
+title.estvar=NULL
+title.filter=NULL
+rawtable=FALSE
+add0=FALSE
+counts=FALSE
+estround=0
+cvround=2
+estvar.TPA=FALSE
+plt.filter=NULL
+ACI=FALSE
+cur10yrs=FALSE
+title.main=NULL
+esttype="TREE"
+unitvar2=NULL
+savetitle=TRUE
+savetitle=FALSE
+domlut=NULL
+domvarlst=NULL
+
+
+cond=WYcond
+pltstrat=WYpltstrat
+tree=WYtree
+puniqueid="CN"
+stratalut=WYstrlut
+FIA=TRUE
+landarea="TIMBERLAND"
+rowvar="FORTYPCD"
+colvar="STDSZCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref=title.ref
+savedata=TRUE
+rawdata=TRUE
+allin1=FALSE
+outfolder=outfolder
+outfn="areaest1a"
+cvround=3
+nullcheck=FALSE
+esttype="TREE"
+unitvar2=NULL
+savetitle=TRUE
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+rowvar="SPCD"
+colvar="OWNGRPCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref=title.ref
+savedata=FALSE
+rawdata=TRUE
+unitvar2=NULL
+savetitle=TRUE
+
+datorig.n = tdomdat[tdomdat[,unitvar] == 1,]
+esttype="TREE"
+domain="TOTAL"
+group=estvar.name
+
+## Number of trees by species
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+rowvar="SPCD"
+#colvar="FORTYPCD"
+rowvar="FORTYPCD"
+colvar="STDSZCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref=title.ref
+savedata=FALSE
+
+
+system.time(
+test <- GBestTree(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="FORTYPCD", colvar="STDSZCD", estvar="TPA_UNADJ", estvar.TPA=FALSE, 
+	estvar.filter="STATUSCD == 1", row.FIAname=TRUE, col.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE, rawdata=TRUE)
+)
+
+system.time(
+test <- GBestTree(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="FORTYPCD", estvar="TPA_UNADJ", estvar.TPA=FALSE, 
+	estvar.filter="STATUSCD == 1", row.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE)
+)
+
+system.time(
+test <- GBestTree(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="SPCD", estvar="TPA_UNADJ", estvar.TPA=FALSE, 
+	estvar.filter="STATUSCD == 1", row.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE, rawdata=TRUE)
+)
+
+
+system.time(
+test <- GBestTree(tree=WYtree, cond=WYcond, pltstrat=WYpltstrat, stratalut=WYstrlut, FIA=TRUE,
+ 	rowvar="SPCD", colvar="STDSZCD", estvar="TPA_UNADJ", estvar.TPA=FALSE, 
+	estvar.filter="STATUSCD == 1", row.FIAname=TRUE, col.FIAname=TRUE, title.ref=title.ref,
+	savedata=FALSE, rawdata=TRUE)
+)
+
+## GBestgroup
+datorig.n <- tdomdat[tdomdat[,unitvar] == 3,]
+uniqueid=tuniqueid
+#domain="FORTYPNM_STDSZNM"
+#group="CONDPROP_ADJ"
+domain="TOTAL"
+group=estvar.name
+xdom.d=NULL
+datorig.d=NULL
+datorig <- datorig.n
+
+
+
+xdom.n <- datorig.n[datorig.n[,domain] == domNames[1],]
+xdom.d <- NULL
+
+group=sort(tdomvarlst)
+nonresp=FALSE
+nonsampplots=NULL
+substrvar=NULL
+esttype="ACRE"
+datorig.d=NULL
+group.d=NULL
+ratiotype=NULL
+
+##GBest.pbarfun
+x.n=datorig[datorig[,strvar] == 1,]
+group.n=group
+x.d=NULL
+group.d=NULL
+
+
+## Number of trees by forest type and stand-size class
+cond=WYcond
+tree=WYtree
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+#rowvar="SPCD"
+#colvar=NULL
+rowvar="FORTYPCD"
+colvar="STDSZCD"
+#rowvar="OWNGRPCD"
+#colvar="DSTRBCD1"
+estvar="TPA_UNADJ"
+#estvar="VOLCFNET"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref="Wyoming, 2011-2012"
+savedata=FALSE
+outfolder=outfolder
+rawtable=TRUE
+allin1=TRUE
+estround=4
+cvround=6
+nullcheck=FALSE
+esttype="TREE"
+unitvar2=NULL
+
+estvarn=estvar
+estvarn.TPA=estvar.TPA
+estvarn.filter=estvar.filter
+estvarn.name=estvar.name
+adj=TRUE
+
+
+
+## pcheck.esttree
+esttype="TREE"
+ratiotype="PERACRE"
+estvarn=estvar
+estvarn.TPA=estvar.TPA
+estvarn.filter=estvar.filter
+estvarn.name=estvar.name
+tdomvar=tdomvar
+adj=TRUE
+
+
+## datSumTree
+tree=treefn
+cond=condall
+plt=NULL
+ACI=FALSE 
+puniqueid="CN"
+tsumvarlst=NULL
+tsumvarnmlst=NULL 
+adjTPA=1
+tfun=sum
+adjplot="NONE"
+strvar=NULL 
+unitvar=NULL
+savedata=FALSE
+parameters=FALSE
+outfolder=NULL
+outfn=NULL
+TPA=FALSE
+
+tree=treefn
+cond=condall
+tuniqueid=tuniqueid
+cuniqueid=cuniqueid
+bycond=TRUE
+tsumvarlst=estvarn
+TPA=estvarn.TPA
+tfilter="NONE"
+adjstrat=TRUE
+savedata=FALSE
+
+## GBestgroup
+datorig <- tdomdat[tdomdat[,unitvar] == 1,]
+uniqueid=tuniqueid
+domain="FORTYPNM_STDSZNM"
+#group="CONDPROP_ADJ"
+group=estvar.name
+nonresp=FALSE
+nonsampplots=NULL
+substrvar=NULL
+esttype="ACRE"
+datorig.d=NULL
+group.d=NULL
+ratiotype=NULL
+
+
+
+tree=tree.small
+cond=cond.small
+pltstrat=pltstrat
+stratalut=strlut
+estvar=estvar
+estvar.TPA=estvar.TPA
+estvar.filter=estvar.filter
+rawtable=TRUE
+puniqueid="PLT_CN"
+
+
+
+
+
+
+pltstrat=pltstrat
+stratalut=strlut
+puniqueid="PLT_CN"
+acreadj=FALSE
+unitvar="FORESTNAME"
+estvar="DRYBIO_AG"
+estvar.TPA=TRUE
+estvar.filter="STATUSCD == 1"
+invyrs=2003:2006
+rowvar="FORTYPCD"
+row.FIAname=TRUE
+savedata=TRUE
+
+
+
+
+invyrs <- 2003:2006
+maxyr <- max(invyrs)
+estvar.filter <- "STATUSCD == 1"
+filenm <- "tree_drybio_live_fortyp_byr1nfs"
+#tabfolder <- "W:/Collaboration/4_jmenlove/FIESTA/outfolder"
+tabfolder <- "C:/_tsf/workspace/menlove/outfolder"
+estvar <- "DRYBIO_AG"
+title.estvar <- "Dry aboveground biomass"
+row.FIAname=TRUE
+outfolder=tabfolder
+stratalut=strlut
+
+
+
+
+
+
+
+
+stratalut=strlut
+totacres=3568907
+puniqueid="PLT_CN"
+cond.filter="OWNCD == 11"
+estvar="DRYBIO_AG"
+estvar.TPA=TRUE
+estvar.filter="STATUSCD == 1"
+rowvar="FORTYPCD"
+invyrs=2003:2006
+colvar = "RESERVCD"
+
+
+
+cond=WYcond
+tree=WYtree
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=TRUE
+rowvar="SPCD"
+colvar="OWNGRPCD"
+#rowvar="FORTYPCD"
+#colvar="STDSZCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref="Wyoming, 2011-2012"
+savedata=TRUE
+outfolder=outfolder
+estround=2
+cvround=3
+tadj = TRUE
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut= WYstrlut
+FIA=TRUE
+cond.filter="RESERVCD != 1"
+rowvar="SPCD"
+colvar="STDSZCD"
+estvar="VOLCFNET"
+estvar.TPA=TRUE
+estvar.filter="TREECLCD == 2"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref="Wyoming, 2011-2012"
+title.filter="Nonreserved land"
+savedata=TRUE 
+outfolder=outfolder
+outfn="treeest2"
+
+
+tree=WYtree
+cond=WYcond
+pltstrat=WYpltstrat
+stratalut=WYstrlut
+FIA=FALSE
+unitvar="ESTUNIT"
+rowvar="SPCD"
+colvar="OWNGRPCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE, 
+title.ref="Wyoming, 2011-2012"
+savedata=TRUE
+outfolder=outfolder
+outfn="treeest10a"
+
+
+
+FIA = FALSE
+unitvar = "ESTUNIT"
+
+rowvar="FORTYPCD"
+colvar="OWNCD"
+estvar="CARBON_AG"
+title.estvar="Live carbon"
+estvar.TPA=TRUE
+
+
+## To test GBest_nonratio
+group = "lodgepole pine"
+datorig = tdomdat[tdomdat$ESTUNIT == 1,]
+
+group=estvar.name
+
+
+tree=tree.small
+cond=cond.small
+pltstrat=pltstrat
+stratalut=strlut
+estvar=estvar
+estvar.TPA=estvar.TPA
+estvar.filter=estvar.filter
+rawtable=TRUE
+
+
+cond=datstrat
+cuniqueid="CN"
+tuniqueid="PLT_CN"
+estvar="TPA_UNADJ"
+stratalut=strata_lut
+strvar="STRATA_MAP"
+totacres=totacres
+savedata=TRUE
+addtitle=TRUE
+outfolder=outfolder
+title.ref="SMNRA, 2004-2012 - STRATA2"
+pltstrat=NULL
+
+tree=treey
+cond=condy
+pltstrat=pltstraty
+stratalut=strluty
+estvar=estvar
+estvar.filter=filter
+
+
+tree=treex
+cond=condx
+pltstrat=pltstrat
+cuniqueid=cuniqueid
+puniqueid="CN"
+FIA=TRUE
+landarea=landarea
+cond.filter=cond.filter
+plt.filter=plt.filter
+stratalut=stratalut
+estvar=estvarx
+estvar.TPA=TRUE
+estvar.filter=estvar.filter
+rowvar=rowvarx
+colvar=colvarx
+row.FIAname=TRUE
+col.FIAname=TRUE
+allin1=allin1
+addtitle=addtitle
+title.ref=title.ref
+title.rowvar=title.rowvar
+title.colvar=title.colvar
+title.estvar=title.estvar
+title.filter=title.filter
+savedata=savedata
+parameters=FALSE
+outfolder=outfolder
+outfn=outfn
+
+
+pltstrat=datstrat
+stratalut=strlut
+FIA=TRUE
+rowvar="FORTYPCD"
+#rowvar="OWNCD"
+#colvar="FORTYPCD"
+estvar="VOLCFNET"
+estvar.filter="STATUSCD == 1"
+estvar.TPA=TRUE
+row.FIAname=TRUE
+col.FIAname=TRUE 
+title.ref="Wyoming, 2011-2012"
+title.estvar="Live volume"
+savedata=TRUE
+outfolder=outfolder
+
+
+pltstrat=datstrat
+stratalut=strlut
+FIA=TRUE
+rowvar="SPCD"
+colvar="OWNGRPCD"
+estvar="TPA_UNADJ"
+estvar.TPA=FALSE
+estvar.filter="STATUSCD == 1"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref="Wyoming, 2011-2012"
+title.estvar="Number of trees"
+title.rowvar="Species"
+title.colvar="Owner Group"
+savedata=TRUE
+outfolder=outfolder
+
+
+
+tree=treey
+cond=condy
+pltstrat=pltstraty
+stratalut=strluty
+estvar=estvar
+estvar.filter=filter
+
+
+
+
+tree=cotree
+cond=cocond
+pltstrat=pltstrat
+puniqueid="CN"
+stratalut=stratalut
+FIA=TRUE
+landarea="FOREST"
+rowvar="SPCD"
+colvar="STDSZCD"
+estvar="VOLCFNET"
+estvar.TPA=TRUE
+estvar.filter="STATUSCD == 1"
+estvar.name="LIVEVOL"
+row.FIAname=TRUE
+col.FIAname=TRUE
+title.ref=title.ref
+title.estvar="Live net volume"
+title.rowvar="Species"
+title.colvar="Stand size class"
+savedata=TRUE
+outfolder=outfolder
+
+
+
+treef=treef
+condall=condall
+bytdom=bytdom
+esttype="TREE"
+estvarn=estvar
+estvarn.TPA=estvar.TPA
+estvarn.filter=estvar.filter
+estvarn.name=estvar.name
+tdomvar=tdomvar
+
+
