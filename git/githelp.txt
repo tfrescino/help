@@ -23,13 +23,22 @@ git gui
 # git <verb> --help
 # man git-<verb>
 
-## To clone a repository.. 
+## To add an existing folder to GitHub (from computer to GitHub).. 
 ## First, create repository on GitHub; then, go (cd) to directory you want the repository in, then:
-## This, pulls down all the data for that repository and checks out a working copy of the latest version.
-# git clone <repository>
-# git clone <repository> <newname>
-cd C:/_tsf/_GitHub
-git clone https://github.com/tfrescino/FIESTA
+## Initialize the local directory as a Git repository
+## Add (stage) the files you want to commit, and then commit
+cd <local directory>
+git add .
+git commit -m "First commit"
+git remote add <origin> <Github repository URL.git>
+git push <origin> <master>
+
+
+## To clone a GitHub repository (from GitHub to computer).. 
+## This, pulls down all the data from GitHub repostitory and checks out a working copy of the latest version.
+# git clone <GitHub repository URL.git>
+# git clone <GitHub repository URL.git> <newname>
+git clone https://github.com/tfrescino/FIESTA.git
 
 ## To check status of files. 
 # git status <repository>
