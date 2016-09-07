@@ -94,7 +94,7 @@ start <filenm>
 
 
 ##############################################################################
-## So, the routine would be, if modifying 2 files:
+## So, the routine would be, if modifying files:
 ##############################################################################
 
 ## To make edit changes and update GitHub
