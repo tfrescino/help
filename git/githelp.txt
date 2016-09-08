@@ -12,6 +12,10 @@ then put it in staging area, where an index is created of changes, then commit (
 ## To configure the default text editor
 git config --global core.editor "'C:/Program Files/Windows NT/Accessories/wordpad.exe' -multiInst -nosession"
 
+## To configure your name and email address
+git config --global user.name "tfrescino"
+git config --global user.emai "tfrescino@yahoo.com"
+
 ## To look at config settings
 git config --list
 
